@@ -183,3 +183,127 @@ public class Demo02{
 * byte和short注意取值范围
 * 变量一定要赋值后才能够使用
 * 变量不能够在作用域之外作用。作用域是从定义变量的一行开始，一直到直接所属的大括号结束为止
+### 数据类型转换
+
+数据类型不一样时，会发生类型转换
+
+* 自动类型转换（隐式）
+  * 特点：代码不需要进行特殊处理，自动完成
+  * 规则：数据范围从小到大
+* 强制类型转换（显式）
+  * 代码需要进行特殊的格式处理，不能自动完成
+  * 格式：范围小的类型 范围小的变量名 = （范围小的类型）原本范围大的数据
+
+~~~java
+public class Demo03{
+    public static void main(String[] args){
+        //缺少一个L,将右边范围小的int转换为long，符合自动类型转换的要求，属于自动类型转换
+     	long num1 = 100;
+        System.out.println(num1);
+        
+        //float范围比double小，也是自动类型转换
+        double num2 = 2.2F;
+        System.out.println(num2);	//2.200000047683716
+        
+        //long转换为float，符合数据范围从小到大，自动类型转换，结果为30.0
+        float num3 = 30L;
+        System.out.println(num3);	//30.0
+        
+        //long转化为int，需要强制类型转化
+        int num4 = (int)100L;
+        System.out.println(num4);	//100
+        
+        //数据溢出
+        int num5 = (int)60000000000L;
+        System.out.println(num5);	//-129542144
+        
+        //精度损失，浮点数转化为整数，去掉小数部分
+        int num6 = (int)3.5;
+        System.out.println(num6);	//3
+        
+        //计算机的底层用数字代表字符A，一旦char要进行数学运算，就会转为int类型：A是65
+        char zifu1 = 'A';
+        System.out.println(zifu1 + 1);	//66
+        
+        //byte + byte先转为int类型
+        byte num7 = 30;
+        byte num8 = 60;
+        //byte + byte-->int + int-->int
+        int result1 = num7 + num8;
+        System.out.println(result1);
+        
+        //byte + short
+        short num9 = 50;
+        //short + byte-->int + int-->int；这里要有括号否则就是对num7进行局部的数据类型转化
+        short result2 = (short)(num7 + num9);
+        System.out.println(result2);
+    }
+}
+~~~
+
+注意事项
+
+* 强制类型转换一般不推荐使用，会发生精度损失、数据溢出
+* byte/short/char这3种类型可以发生数学运算
+* <b>byte/short/char这3种类型在运算的时候会先转为int类型</b>
+* 布尔类型不能发生强制类型转化
+
+### ASCII码表
+
+ASCII 码表 美国信息标准交换代码
+
+Unicode万国码，数字和符号的对照关系，开头0-127与ASCII完全一样，从128开始包括更多字符
+
+0-48；A-65；a-97
+
+~~~java
+public class Demo04{
+	public static void main(String[] args){
+        char zifu1 = '1';
+        System.out.println(zifu1 + 0);
+        
+        char zifu2 = 'C';
+        //char-->int发生自动类型转化
+        int num = zifu2;
+        System.out.println(num);
+        
+        char zifu3 = '中';
+        System.out.println(zifu3 + 0);	//20013
+    }    
+}
+~~~
+
+## 6、运算符
+
+进行特定运算的符号，如+；用运算符连接起来的 是表达式
+
+算术运算符
+
+除数/，小学运算中的除数；
+
+取模：取余数
+
+注意事项：<b>一旦运算中出现不同数据类型，结果会是数据类型大的那种</b>
+
+~~~java
+public class Demo05{
+	public static void main(String[] args){
+		//两个常量之间可以进行运算
+        System.out.println(20 + 30);
+        
+        //两个变量之间可以进行运算
+        int a = 20;
+        int b = 30;
+        System.out.println(a + b);
+        
+        //变量和常量之间混合使用
+        System.out.println(10 * a);
+        
+        result1 = b / a;
+        result2 = b % a;
+        System.out.println(result1);
+        System.out.println(result2);
+    }
+}
+~~~
+

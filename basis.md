@@ -582,3 +582,98 @@ public class Demo10{
 
 ## 3、循环语句
 
+循环结构的基本组成部分
+
+* 初始化语句
+* 条件判断
+* 循环体
+* 步进语句，每次循环结束之后都要执行一次
+
+ ### for循环
+
+for（初始化语句；条件判断；步进语句）{
+
+​	循环体
+
+}
+
+for循环中的变量在小括号中定义，只有在循环内才可以使用
+
+~~~java
+public class Demo11{
+    public static void main(String[] args){
+		for(int i = 1;i <= 10;i++ ){
+        	System.out.println("真香! " + i);
+        }
+        System.out.println("程序停止");
+    }
+}
+~~~
+
+### while循环
+
+while(条件判断){
+
+​	循环体
+
+​	步进语句
+
+}
+
+~~~java
+public class Demo12{
+	public static void main(String[] args){
+		int i = 1;
+        while(i <= 10){
+			System.out.println("真香！ " + i);
+            i++;
+        }		
+    }
+}
+~~~
+
+### do while循环
+
+do{
+
+​	循环体
+
+​	步进语句
+
+}while(条件判断);
+
+~~~java
+public class Demo13{
+	public static void main(String[] args){
+		int i = 1;
+        do{
+            System.out.println("真香");
+            i++;
+        }while(i <= 10);
+        
+       int sum = 0;
+        for(i = 1;i <= 100;i++){
+			if(i % 2 == 0){
+                sum += i;
+            }
+        }
+        System.out.println("结果是： " + sum);
+    }
+}
+~~~
+
+do while循环至少会执行一次
+
+## 4、条件控制语句
+
+break语句
+
+可以用在switch语句和循环语句。次数确定用for循环，否则用while循环
+
+continue语句
+
+一旦执行，立刻跳过当前循环剩余内容，马上开始下一次循环。
+
+## 5、死循环
+
+出现死循环可以用 ctrl + c取消程序的执行。cls能清屏

@@ -247,6 +247,7 @@ public class Demo03{
 * byte/short/char这3种类型可以发生数学运算
 * <b>byte/short/char这3种类型在运算的时候会先转为int类型</b>
 * 布尔类型不能发生强制类型转化
+* <b>编译器的常量优化：在赋值时，如果右侧全部是常量，没有任何变量，编译器会将常量运行结果的值直接赋值给左边。不会用默认的int类型赋值</b>
 
 ### ASCII码表
 
@@ -392,4 +393,92 @@ public class Demo06{
 
 与&&、或||、非！
 
+注意事项
+
+* 与&&和或||有短路效果，根据左边可以判断得到最终结果，右边的代码将不再执行，从而节省一定的性能
+* 逻辑运算符只用于boolean
+* 与或运算符左右端各需要一个布尔值
+* 与或可以连接多个条件
+
+### 三元运算符
+
+一元运算符：只需要一个数据就可以进行操作的运算符；自增自减、取反
+
+二元运算符：需要两个数据才可以进行操作的运算符
+
+三元运算符：需要三个运算符才可以进行操作的运算符。格式：变量名称 = 条件判断 ？ 表达式A ： 表达式B。
+
+注意事项
+
+* 必须同时保证表达式A和表达式B都符合左侧数据类型的要求
+* 三元运算符的结果必须被使用
+
+~~~java
+public class Demo07{
+    public static void main(String[] args){
+		int a = 10;
+        int b = 20;
+        int max = a > b ? a : b;
+        System.out.println("最大值：" + max);
+        
+        //int result = 3 > 4 ? 2.5 : 10;	×
+        System.out.println(3 > 4 ? 2.5 : 10);	//10.0
+    }
+} 
+~~~
+
+## 7、方法入门
+
+方法是将代码抽出来，从而达到分类的效果
+
+### 定义方法的格式
+
+public static void 方法名称(){
+
+​	方法体
+
+}
+
+方法名称的命名规则和变量一样，使用小驼峰。方法体可以包含任意个语句。
+
+#### 注意事项
+
+* 方法定义的先后顺序无所谓
+* 方法（包含public static void）不能产生嵌套包含关系
+* 方法的使用需要调用：方法名称();
+
+~~~java
+public class Demo08{
+    public static void main(String[] args){
+        PC();	//调用电脑
+        browser();	//调用浏览器
+        github();	//调用github
+    }
+    
+    //打开电脑
+    public static void PC(){
+        System.out.println("插上电源");
+		System.out.println("按下开机键");
+    }
+    
+    //打开浏览器
+    public static void  browser(){
+        System.out.println("打开浏览器");
+    }
+    
+    //打开github
+	public static void github(){
+        System.out.println("输入地址");
+		System.out.println("进入github");
+    }
+}
+~~~
+
+## 8、 JShell的使用
+
+在cmd命令中直接输入jshell 。直接输入System.out.println(“Hello world”);类似于脚本
+
+退出语句: <b>/exit</b>
+
+jshell是轻量级的小工具，其他还是要单独保存为文件
 

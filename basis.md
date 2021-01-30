@@ -482,3 +482,103 @@ public class Demo08{
 
 jshell是轻量级的小工具，其他还是要单独保存为文件
 
+# 二、流程控制
+
+## 1、顺序结构
+
+按顺序执行
+
+## 2、判断语句
+
+### if语句
+
+分类
+
+* 单if语句
+* if else语句
+* if else if else语句
+
+~~~java
+public class Demo09{
+    public static void main(String[] args){
+		//单if语句
+        System.out.println("看见一个网吧");
+        
+        int age = 17;
+        if(age >= 18){
+			System.out.println("打游戏");
+        }
+        System.out.println("回家");
+        
+        System.out.println("=========");
+            
+        //标准if else语句,非黑即白类型
+        int a = 15;
+        if(a % 2 == 0){
+			System.out.println("是偶数");
+        }else{
+			System.out.println("是奇数");
+        }
+        
+        //扩展if语句
+        int score = 100;
+        if (score > 100 || score < 0){
+			System.out.println("成绩不合法");
+        }else if(score >= 90 || score < 100){
+			System.out.println("成绩为优秀");
+        }else if(score >= 80 || score < 90){
+			System.out.println("成绩为良");
+        }else if(score >= 60 || score < 80){
+			System.out.println("成绩为及格");
+        }else{
+			System.out.println("成绩不及格");
+        }
+    }
+}
+~~~
+
+### switch语句
+
+注意事项：
+
+* 多个case后面的数值不可以重复
+* switch后面跟的小括号只能是byte/short/char/int类型和引用数据类型string
+* 顺序可以改变，不一定要按照一定的顺序，default总是最后执行的
+
+~~~java
+public class Demo10{
+    public static void main(String[] args){
+		int num = 1;
+        
+        switch(num){
+            case 1:
+                System.out.println("星期一");
+                break;
+            case 2:
+                System.out.println("星期二");
+                break;
+            case 3:
+                System.out.println("星期三");
+                break;  
+            case 4:
+                System.out.println("星期四");
+                break;
+            case 5:
+                System.out.println("星期五");
+                break;
+            case 6:
+                System.out.println("星期六");
+                break;
+            case 7:
+                System.out.println("星期七");
+                break;     
+            default:
+                System.out.println("不合理");
+                break;
+        }
+    }
+}
+~~~
+
+## 3、循环语句
+

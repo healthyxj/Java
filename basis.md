@@ -284,7 +284,6 @@ public class Demo04{
 取模：取余数
 
 注意事项：<b>一旦运算中出现不同数据类型，结果会是数据类型大的那种</b>
-
 ~~~java
 public class Demo05{
 	public static void main(String[] args){
@@ -299,11 +298,98 @@ public class Demo05{
         //变量和常量之间混合使用
         System.out.println(10 * a);
         
-        result1 = b / a;
-        result2 = b % a;
-        System.out.println(result1);
-        System.out.println(result2);
+        int result1 = b / a;
+        int result2 = b % a;
+        System.out.println(result1);	//1
+        System.out.println(result2);	//10
+        
+        //String是要大写的，同时字符也是要用双引号的
+        String str1 = "Hello";
+        System.out.println(str1);	
+        
+        System.out.println(str1 + "World");	//HelloWorld
+        
+        String str2 = "java";
+        System.out.println(str2 + 20 + 20);	//java2020
+        System.out.println(str2 + (20 + 20));	//java40
     }
 }
 ~~~
+
+### 自增自减运算符
+
+自增运算符: ++；自减运算符: --。让一个变量涨一个数字或降一个数字 ，可以写在变量名之前，也可以写在变量名之后。
+
+使用方式
+
+* 单独使用，不与其他操作混合，自己独立成为一个步骤
+* 混合使用：与其他操作混合
+
+区别:单独使用时，前++和后++无区别；混合使用时，前++，变量马上+1，然后拿着结果去使用；后++先用变量本来的值，再让变量+1.【前++，先加后用，后++，先用后加】
+
+注意事项：只有常量才能使用自增自减运算符
+
+~~~java
+public class Demo06{
+	public static void main(String[] args){
+		int num1 = 10;
+        System.out.println(num1);
+        ++num1;
+        System.out.println(num1);
+        num1++;
+        System.out.println(num1);
+        System.out.println("======");
+        
+        int num2 = 20;
+        System.out.println(++num2);	//21
+        System.out.println(num2);	//21
+       	System.out.println("======");
+        System.out.println(num2++);	//21
+        System.out.println(num2);	//22
+        
+        int num3 = 30;
+        int result1 =--num3;
+        System.out.println(result1);	//29
+        System.out.println(num3);	//29
+        System.out.println("======");
+        
+        int result2 = num3--;
+        System.out.println(result2);	//29
+        System.out.println(num3);	//28
+    }
+}
+~~~
+
+### 赋值运算符
+
+赋值运算符分类
+
+* 基本赋值运算符
+  * =
+* 复合赋值运算符
+  * +=	a += 1 --> a = a + 1
+  * -= 类比上面一条语句
+  * *=
+  * /=
+  * %=
+
+注意事项
+
+* 只有变量才能进行赋值运算
+* 复合赋值会发生强制类型转换
+
+### 比较运算符
+
+ 大于，小于，等于(==)，不等于(!=)
+
+注意事项
+
+* 比较运算符输出的结果是一个布尔值
+  * 10 < 12输出true
+* 比较运算符不能连着写
+
+### 逻辑运算符
+
+与&&、或||、非！
+
 

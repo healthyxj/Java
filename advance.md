@@ -9,7 +9,7 @@ IDE (integrated development environment) 集成开发环境。
 
 Intellij IDEA
 
-## 项目结构
+## 1、项目结构
 
 项目(project)-模块(module)-包(package)
 
@@ -21,7 +21,7 @@ Intellij IDEA
 
 如果需要导入module，就可以右键import进行导入
 
-## 用IDEA写helloworld文件
+## 2、用IDEA写helloworld文件
 
 对包名称右键，创建一个新的java class，名称为HelloWorld，就会创建一个类名称。
 
@@ -46,7 +46,7 @@ public class HelloWorld {
 }
 ~~~
 
-## 基本配置
+## 3、基本配置
 
 在左上角的File-Settings可以进行设置。
 
@@ -56,7 +56,7 @@ public class HelloWorld {
   * 代码中出现红颜色的就是错误的
   * Keymap（所有快捷键）界面下，小齿轮选择dumplicate会生成default copy。找到Main menu-code-completion，选择basic，右键remove。然后add keyboard shortcut为alt+斜杠/，不用担心重复，因为另一个选项用不着。
 
-## 常用快捷键
+## 4、常用快捷键
 
 |        快捷键         |                  功能                  |
 | :-------------------: | :------------------------------------: |
@@ -82,7 +82,7 @@ public class HelloWorld {
 
 
 
-## 方法的复习
+## 1、方法的复习
 
 * 定义格式
 
@@ -119,7 +119,7 @@ public class Demo02Method {
 }
 ~~~
 
-## 方法的定义
+## 2、方法的定义
 
 定义方法的完整格式
 
@@ -148,7 +148,7 @@ public class Demo02Method {
 * 方法名称
 * 参数列表：包含参数类型和参数名称
 
-## 方法的调用
+## 3、方法的调用
 
 单独调用：方法名称();
 
@@ -212,6 +212,103 @@ public class Demo02Parameter {
 ~~~
 
 也可以分为<b>有返回值和无返回值</b>的情况
+
+注意
+
+* 对于有返回值的方法，可以使用单独调用，打印调用或赋值调用
+* 对于无返回值的方法，只能使用单独调用，不能使用打印调用或赋值调用
+
+~~~java
+package com.github.day01.demo02;
+
+public class Demo02MethodReturn {
+    public static void main(String[] args) {
+        //有返回值
+        getsum(5,10);
+        System.out.println(getsum(5,10));
+        System.out.println("--------------------");
+
+        //无返回值
+        //System.out.println(printsum(5,10));   ×
+        printsum(5,10);
+
+    }
+
+    //有返回值
+    public static int getsum(int a, int b){
+        int result = a * b;
+        return result;
+    }
+
+    //无返回值
+    public static void printsum(int a, int b){
+        int result = a * b;
+        System.out.println("结果是： " + result);
+    }
+}
+~~~
+
+ ## 4、练习
+
+### a、比较两数字是否相同
+
+~~~java
+package com.github.day01.demo02;
+
+public class Demo02MethodReturn {
+    public static void main(String[] args) {
+        //有返回值
+        getsum(5,10);
+        System.out.println(getsum(5,10));
+        System.out.println("--------------------");
+
+        //无返回值
+        //System.out.println(printsum(5,10));   ×
+        printsum(5,10);
+
+    }
+
+    //有返回值
+    public static int getsum(int a, int b){
+        int result = a * b;
+        return result;
+    }
+
+    //无返回值
+    public static void printsum(int a, int b){
+        int result = a * b;
+        System.out.println("结果是： " + result);
+    }
+}
+~~~
+
+### b、求出1到100和打印指定次数
+
+~~~java
+package com.github.day01.demo02;
+
+public class Demo02GetSum {
+    public static void main(String[] args) {
+        GetSum();
+        print(13);
+    }
+
+    public static void GetSum(){
+        int sum = 0;
+        for (int i = 1; i <= 100; i++) {
+            sum += i;
+        }
+        System.out.println("1到100的和是：" + sum);
+    }
+
+    public static void print(int num){
+        for (int i = 0; i < num; i++) {
+            System.out.println("Hello,world!");
+        }
+    }
+}
+~~~
+
 
 
 

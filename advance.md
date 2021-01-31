@@ -73,6 +73,146 @@ public class HelloWorld {
 
 # 二、方法
 
+只要包(package)名称前面一样，最后修改，生成的也是放在同一路径下。
+
+方便
+
+* 循环次数.fori加上回车就会自动生成for循环语句
+  * 注意<b>要在main语句下</b>，例如5.fori再按下enter键，会生成for (int i = 0; i < 5; i++)
+
+
+
+## 方法的复习
+
+* 定义格式
+
+~~~java
+public static void 方法名称(){
+    方法体
+}
+~~~
+
+* 调用:在main里输入: 方法名称();
+
+注意事项
+
+* 方法定义的先后顺序无所谓
+* 方法定义必须挨着，不能在一个方法的内部定义另一个方法
+* 希望执行方法，需要对方法进行调用
+
+~~~java
+package com.github.day01.demo02;
+
+public class Demo02Method {
+    public static void main(String[] args) {
+        print();
+    }
+
+    public static void print() {
+        for (int i = 0; i < 5; i++) {
+            for (int i1 = 0; i1 < 20; i1++) {
+                System.out.print("*");  //去掉ln表示不换行
+            }
+            System.out.println();   //不加内容直接用于换行
+        }
+    }
+}
+~~~
+
+## 方法的定义
+
+定义方法的完整格式
+
+修饰符 返回值类型 方法名称（参数类型 参数名称， ……）{
+
+​	方法体；
+
+​	return 返回值;
+
+}
+
+一些术语的解释
+
+* 修饰符，即public static
+* 返回值类型，方法产生的最终数据结果的类型
+* 方法名称，方法的名称，小驼峰格式
+* 参数类型，进入方法的数据的类型
+* 参数名称，进入方法的数据对应的变量名称；多个参数，用逗号分隔
+* 方法体，方法需要做的事情
+* return，停止当前方法，将后面的返回值返回给调用处
+* 返回值，方法执行最后产生的数据结果。返回值的类型要与方法名称前面的类型相一致
+
+因此，定义一个方法有三要素：
+
+* 返回值类型
+* 方法名称
+* 参数列表：包含参数类型和参数名称
+
+## 方法的调用
+
+单独调用：方法名称();
+
+打印调用：System.out.println(方法名称(参数));
+
+赋值调用：数据类型 变量名称 = 方法名称(参数);
+
+返回值类型为void的只能用单独调用，不能用打印调用或赋值调用
+
+步骤是：找到方法-参数传递-执行方法体-带着返回值回到方法的调用处
+
+~~~java
+package com.github.day01.demo02;
+
+public class Demo02methoduse {
+    public static void main(String[] args) {
+        //单独调用
+        add(10,20); //在IDEA中a:和b:不能被选中，只是用于指引参数表征的含义
+        System.out.println("==========");
+
+        //打印调用
+        System.out.println(add(10,20));
+        System.out.println("==========");
+
+        //赋值调用
+        int num = add(10,20);
+        System.out.println("变量的值：" + num);
+    }
+
+    public static int add(int a, int b){
+        System.out.println("方法执行了！");
+        int result = a + b;
+        return result;
+    }
+}
+~~~
+
+根据之前，可以看出可以分为<b>有参数和无参数</b>的情况
+
+~~~java
+package com.github.day01.demo02;
+
+public class Demo02Parameter {
+    public static void main(String[] args) {
+        mult1(15,20);
+        System.out.println("---------");
+        mult2();
+    }
+
+    public static void mult1(int a, int b){
+        int result = a * b;
+        System.out.println("结果是： " + result);
+    }
+
+    public static void mult2(){
+        for (int i = 0; i < 5; i++) {
+            System.out.println("Hello,world!" + i);
+        }
+    }
+}
+~~~
+
+也可以分为<b>有返回值和无返回值</b>的情况
+
 
 
 

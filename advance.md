@@ -498,6 +498,188 @@ public class Demo03ArrayUse {
 }
 ~~~
 
+## 7、Java中内存的划分
+
+内存需要划分为5部分：
+
+* <b>栈(stack)</b>: 存放的是方法中的局部变量。（局部变量，方法的参数）局部变量，一旦超出作用域，立刻从栈内存中消失。<b>方法的运行在栈中运行</b>
+* <b>堆(heap)</b>: <b>new出来的都放在堆中</b>。堆里面的都有地址值，地址值是16进制。堆内存里面的数据有默认值。
+  * 规则是：整数为0，浮点数为0.0，字符为'\u0000'，布尔为false，引用类型为null
+* <b>方法区(method area)</b>: 存储.class相关信息，包含方法的信息
+* <b>本地方法栈(native method stack)</b>: 与操作系统相关
+* <b>寄存器(register)</b>: 与CPU相关
+
+### a、一个数组的内存划分
+
+public static void main(String[] args)先保存在方法区 。先运行方法区的main方法，将main中的内容加载到栈内存中，并且为main方法开辟一块空间。
+
+![image](G:\temp images\一个数组的内存图.png)
+
+### b、两个数组的内存划分
+
+真正要执行，一定要进栈，
+
+![images](G:\temp images\两个数组的内存图.png)
+
+
+
+![image](G:\temp images\两个引用指向同一个数组.png)
+
+### c、数组常见问题
+
+数组索引越界异常
+
+ArrayIndexOutOfBoundsException。
+
+空指针异常
+
+数组初始化，分部执行时。所有引用类型变量都可以赋值为null。
+
+NullPointerException。
+
+## 8、数组进阶
+
+### a、获取数组的长度
+
+方法是数组名称.length
+
+注意：数组一旦创建，程序运行期间，长度不可改变
+
+### b、数组的遍历输出
+
+遍历数组，对数组中的每一个元素进行挨个处理。
+
+一般使用循环的方法对数组进行处理。<b>IDEA中用数组长度.fori</b>
+
+### c、数组的最值
+
+遍历与某个值进行比较，这个某个值可以用数组的第一个值进行赋值
+
+~~~java
+package com.github.day01.demo03;
+
+public class Demo03ArrayLength {
+    public static void main(String[] args) {
+        int[] ArrayA = new int[5];
+        int[] ArrayB = new int[]{2, 1, 23, 3, -5, 3, 185, 4859, 646, 749, 670, 2};
+        //获取数组长度
+        System.out.println("数组A的长度为" + ArrayA.length);
+        System.out.println("数组B的长度为" + ArrayB.length);
+        System.out.println("------------------------");
+
+        //数组的遍历
+        int[] ArrayC = new int[]{11, 1, 4154, 9648, 974, 16, 5};
+        for (int i = 0; i < ArrayC.length; i++) {   //这里用length可以避免数组更改带来的影响
+            System.out.println("第" + (i + 1) + "个元素的值为" + ArrayC[i]);
+        }
+        System.out.println("------------------------");
+
+        //求出数组的最大值和最小值
+        int Max = ArrayB[0];
+        int Min = ArrayB[0];
+        for (int i = 1; i < ArrayB.length; i++) {
+            if (ArrayB[i] > Max) {
+                Max = ArrayB[i];
+            }
+            if (ArrayB[i] < Min) {
+                Min = ArrayB[i];
+            }
+        }
+        System.out.println("最大值为" + Max + "， 最小值为" + Min);
+    }
+}
+~~~
+
+### d、数组元素反转
+
+不能使用新数组，只能用原来的唯一的数组。
+
+<b>数组元素反转，其实是对称位置的元素交换</b>。通常是一个索引，表示对称位置需要两个索引min和max。一开始为0和长度减一。
+
+然后是交换两个变量的值，要借助第三个变量temp。
+
+当min >= max时，停止交换。（min < max时，应该继续交换）
+
+~~~java
+package com.github.day01.demo03;
+
+public class Demo03ArrayReverse {
+    public static void main(String[] args) {
+        int[] Array = new int[]{45, 69, 76, 1, 35};
+
+        /*初始化：令min为数组的第一个元素，max为数组的最后一个元素
+        循环条件：min < max
+        步进： min++，max--
+        循环体：利用临时变量进行交换*/
+        for (int min = 0, max = Array.length - 1; min < max; min++, max--) {
+            int temp = Array[min];
+            Array[min] = Array[max];
+            Array[max] = temp;
+        }
+
+        for (int i = 0; i < Array.length; i++) {
+            System.out.println(Array[i]);
+        }
+    }
+}
+~~~
+
+### e、数组作为方法参数
+
+数组可以作为方法的参数，当调用方法时，向方法的小括号传参，<b>传递进去的是数组的地址值</b>。
+
+~~~java
+package com.github.day01.demo03;
+
+public class Demo03ArrayParam {
+    public static void main(String[] args) {
+        int[] array = new int[]{51,4,8,98,23};
+
+        System.out.println(array);
+        System.out.println("-------------");
+        PrintArray(array);
+
+    }
+
+    public static void PrintArray(int[] array){
+        System.out.print("PrintArray收到的参数是：");
+        System.out.println(array);
+        for (int i = 0; i < array.length; i++) {
+            System.out.println(array[i]);
+        }
+    }
+}
+~~~
+
+### f、数组作为方法的返回值
+
+一个方法可以有任意整数个输入，但是只能有0个或1个输出。解决方法是返回数组，返回的仍是地址，使用的时候需要使用索引。
+
+~~~java
+package com.github.day01.demo03;
+
+public class Demo03ArrayReturn {
+    public static void main(String[] args) {
+        //数组作为返回值，返回的是地址值
+        System.out.println(caculate(45, 13, 96));
+        System.out.println("------------------------");
+
+        //如果需要使用数组的返回值，需要赋值
+        int[] result = caculate(45, 13, 96);
+        System.out.println("结果：" + result[0]);
+        System.out.println("平均值：" + result[1]);
+
+    }
+
+    public static int[] caculate(int a, int b, int c) {
+        int sum = a + b + c;
+        int average = (a + b + c) / 3;
+        int[] result = new int[]{sum, average};
+        return result;
+    }
+}
+~~~
+
 
 
 

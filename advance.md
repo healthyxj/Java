@@ -308,6 +308,196 @@ public class Demo02GetSum {
     }
 }
 ~~~
+ ## 5、方法重载(overload)
+
+对于功能类似的方法，因为参数列表不同，需要重新编写方法。不方便，就有了overload。
+
+### 概念
+
+多个<b>方法的名称一样，但是参数列表不一样</b>。因此只需要记住一个方法名称，就可以实现类似的多个功能。
+
+<b>方法与下列因素有关</b>
+
+* 参数类型不同，
+* 参数个数不同，
+* 参数的多类型顺序不同
+
+与下列因素无关
+
+* 与参数的名称无关
+* 与方法的返回值类型无关
+
+~~~java
+package com.github.day01.demo03;
+
+public class Demo03Overload {
+    public static void main(String[] args) {
+        System.out.println("结果是：" + sum(2,5));
+        System.out.println("------------");
+        System.out.println("结果是：" + sum(2,5,7));
+        System.out.println("------------");
+        System.out.println("结果是：" + sum(2,5,7,8));
+    }
+
+    public static int sum(int a, int b){
+        System.out.println("有2个参数参与运算");
+        return a + b;
+    }
+
+    public static int sum(int a, int b, int c){
+        System.out.println("有3个参数参与运算");
+        return a + b + c;
+    }
+
+    public static int sum(int a, int b, int c, int d){
+        System.out.println("有4个参数参与运算");
+        return a + b + c + d;
+    }
+}
+~~~
+
+### 练习
+
+ 1、比较两个数据是否相等，参数类型分别是两个byte类型，两个short类型，两个int类型，两个long类型。
+
+一般先写方法，再调用。这里熟悉了各种判断的表示方法
+
+~~~java
+package com.github.day01.demo03;
+
+public class Demo03OverloadSame {
+    public static void main(String[] args) {
+        byte a = 1;
+        byte b = 2;
+        System.out.println(same(a,b));
+        System.out.println("--------");
+        System.out.println(same((short)2,(short)3));
+        System.out.println("--------");
+        System.out.println(same(5,5));
+        System.out.println("--------");
+        System.out.println(same(12L,11L));
+    }
+
+    public static boolean same(byte a, byte b){
+        boolean result;
+        if(a == b){
+            result = true;
+        }else{
+            result = false;
+        }
+        System.out.println("执行的是byte类型的比较");
+        return result;
+    }
+
+    public static boolean same(short a, short b){
+        System.out.println("执行的是short类型的比较");
+        if(a == b){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public static boolean same(int a, int b){
+        boolean result = a == b ? true : false;
+        System.out.println("执行的是int类型的比较");
+        return result;
+    }
+
+
+    public static boolean same(long a, long b){
+        System.out.println("执行的是long类型的比较");
+        return a == b;
+    }
+}
+~~~
+
+小技巧：按住shift+F6，可以同时修改原来相同的内容。
+
+选中println，按住ctrl，用鼠标点击就会跳到对应的文件中。输出语句时。println就用了方法的重载。
+
+## 6、数组
+
+数组可以同时存放多个数据值。
+
+数组的特点：
+
+* 是一种引用数据类型
+* 数组中的多个数据类型必须统一
+* 数组的长度在程序运行期间不能改变
+
+### 数组的初始化
+
+在内存中创建一个数组，向其中赋予一些值。
+
+常见的初始化方式有
+
+* 动态初始化（指定长度 or 数据元素个数）
+  * 格式:	数据类型[] 数组名称 = new 数据类型[数组长度];
+    * 例如: int[] ArrayInt = new int[20];
+* 静态初始化（指定内容）
+  * 格式:	数据类型[] 数组名称 = new 数据类型[]{元素1， 元素2 ，……};
+    * 例如:	String[] ArrayString = new String[]{“Hello”, "World“, "Java"};
+* 省略格式的静态初始化
+  * 格式：	数据类型[] 数组名称 = {元素1， 元素2， ……};
+
+注意事项
+
+* 静态初始化没有直接指定长度，仍然会自动推算得到长度
+* 静态初始化和动态初始化的标准格式可以拆分为两个步骤
+  * int[] arrayA;
+  * arrayA = new int[20];
+* <b>静态初始化的省略模式不能拆分成两个步骤</b>
+
+### 访问数组元素
+
+#### a、获取
+
+直接打印数组名称，得到的数组对应的内存地址哈希值。
+
+访问数组元素的格式: 数组名称[索引值], <b>索引值代表元素的编号，从0开始到数组长度-1</b>
+
+#### b、赋值
+
+动态初始化数组时，其中的元素会自动拥有一个默认值
+
+|  类型  |  默认值  |
+| :----: | :------: |
+|  整数  |    0     |
+| 浮点数 |   0.0    |
+|  字符  | '\u0000' |
+|  布尔  |  false   |
+|  引用  |   null   |
+
+其实，静态初始化也有默认值的情况，只不过系统马上将默认值替换为大括号中的内容
+
+~~~java
+package com.github.day01.demo03;
+
+public class Demo03ArrayUse {
+    public static void main(String[] args) {
+        //静态初始化先赋值
+        int[] arrayA = new int[]{10, 20, 30};
+
+        System.out.println("数组的第一个元素是：" + arrayA[0]);
+        System.out.println("数组的最后一个元素是:" + arrayA[2]);
+
+        int num = arrayA[1];
+        System.out.println(num);
+        System.out.println("---------------");
+
+        //动态初始化
+        int[] arrayB = new int[3];
+        arrayB[1] = 3;
+        arrayB[2] = 5;
+        System.out.println(arrayB); //数组内存地址对应的哈希值
+        System.out.println(arrayB[0]);
+        System.out.println(arrayB[1]);
+        System.out.println(arrayB[2]);
+    }
+}
+~~~
+
 
 
 

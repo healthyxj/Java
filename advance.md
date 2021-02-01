@@ -513,17 +513,17 @@ public class Demo03ArrayUse {
 
 public static void main(String[] args)先保存在方法区 。先运行方法区的main方法，将main中的内容加载到栈内存中，并且为main方法开辟一块空间。
 
-![image](G:\temp images\一个数组的内存图.png)
+![image](https://github.com/healthyxj/Java/blob/main/images/%E4%B8%80%E4%B8%AA%E6%95%B0%E7%BB%84%E7%9A%84%E5%86%85%E5%AD%98%E5%9B%BE.png)
 
 ### b、两个数组的内存划分
 
 真正要执行，一定要进栈，
 
-![images](G:\temp images\两个数组的内存图.png)
+![images](https://github.com/healthyxj/Java/blob/main/images/%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%BB%84%E7%9A%84%E5%86%85%E5%AD%98%E5%9B%BE.png)
 
 
 
-![image](G:\temp images\两个引用指向同一个数组.png)
+![image](https://github.com/healthyxj/Java/blob/main/images/%E4%B8%A4%E4%B8%AA%E5%BC%95%E7%94%A8%E6%8C%87%E5%90%91%E5%90%8C%E4%B8%80%E4%B8%AA%E6%95%B0%E7%BB%84.png)
 
 ### c、数组常见问题
 

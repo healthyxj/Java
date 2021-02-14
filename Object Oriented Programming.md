@@ -181,3 +181,75 @@ public class Demo04Phone {
 }
 ~~~
 
+
+## 4、内存图
+
+### 一个对象的内存图
+
+成员变量和成员方法存储在堆中，成员方法指向了方法区中的成员方法。方法在栈中运行会入栈，运行结束时会立刻出栈。此后可以继续运行栈底的main函数，直到main函数结束。
+
+
+
+### 两个对象的内存图
+
+方法区最先有内容。首先把类对象(包括成员变量和成员方法)存储到方法区中。程序继续执行，将main放入到栈中，main进入到栈中，按内容进行执行。
+
+main中new了一个对象，对象存储在堆当中。对象中的成员变量有默认值，成员方法是指向方法区中成员方法的地址值。存储在堆中的对象自己的地址会被复制存储在栈中的main里。
+
+程序继续执行，遇到方法则将方法存储到栈中。方法执行完则出栈。继续运行，可能会遇到下一个方法。
+
+
+
+~~~java
+package com.github.day01.demo04;
+
+import com.github.day01.demo04.Phone;
+
+public class Demo04Phone {
+    public static void main(String[] args) {
+        //2、创建对象
+        Phone pho1 = new Phone();
+
+        //3、使用成员变量
+        System.out.println(pho1.brand); //null
+        System.out.println(pho1.color); //null
+        System.out.println(pho1.price); //0.0
+
+        //给成员变量进行赋值
+        pho1.brand = "荣耀";
+        pho1.color = "蓝色";
+        pho1.price = 4399.0;
+
+        System.out.println("------------------");
+        System.out.println(pho1.brand);
+        System.out.println(pho1.color);
+        System.out.println(pho1.price);
+
+        //4、使用成员方法
+        pho1.toWho("father");
+        pho1.sendMessage();
+
+        //2、创建对象
+        Phone pho2 = new Phone();
+
+        //给成员变量进行赋值
+        pho2.brand = "redmi";
+        pho2.color = "粉色";
+        pho2.price = 2199.0;
+
+        System.out.println("------------------");
+        System.out.println(pho2.brand);
+        System.out.println(pho2.color);
+        System.out.println(pho2.price);
+
+        //4、使用成员方法
+        pho2.toWho("mother");
+        pho2.sendMessage();
+    }
+}
+~~~
+
+### 两个引用指向同一个对象的内存图
+
+![](https://github.com/healthyxj/Java/blob/main/images/%E4%B8%A4%E4%B8%AA%E5%BC%95%E7%94%A8%E6%8C%87%E5%90%91%E5%90%8C%E4%B8%80%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%86%85%E5%AD%98%E5%9B%BE.png)
+

@@ -253,3 +253,253 @@ public class Demo04Phone {
 
 ![](https://github.com/healthyxj/Java/blob/main/images/%E4%B8%A4%E4%B8%AA%E5%BC%95%E7%94%A8%E6%8C%87%E5%90%91%E5%90%8C%E4%B8%80%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%86%85%E5%AD%98%E5%9B%BE.png)
 
+## 5、局部变量和成员变量的区别
+
+主要有
+
+* 定义的位置不同【重点】
+
+  * 局部变量定义在**方法内部**
+  * 成员变量定义在**方法外部**，直接写在类当中
+* 作用范围不一样【重点】
+  * 局部变量：只有在方法中才可以使用
+  * 成员变量：整个类都可以使用
+* 默认值不一样【重点】
+  * 局部变量：没有默认值；使用前必须手动赋值
+  * 成员变量：会自带默认值，规则和数组一样
+* 内存位置不一样
+  * 局部变量：位于栈内存中
+  * 成员变量：位于堆内存中
+* 生命周期不一样
+  * 局部变量：随方法进栈而诞生，随方法出栈而消失
+  * 成员变量：随对象的产生而诞生，随对象被垃圾回收而消失
+
+## 6、封装
+
+封装的体现
+
+* 方法就是一种封装
+* 关键字private也是一种封装
+
+~~~java
+package com.github.demo;
+
+public class encapusalation {
+    public static void main(String[] args) {
+        int[] arrayA = {10, 15, 25, 35};
+        System.out.println(Max(arrayA));
+    }
+
+    public static int Max(int[] array){
+        int Max = array[0];
+
+        for (int i = 1; i < array.length; i++) {
+            if(array[i] > Max){
+                Max = array[i];
+            }
+        }
+        return Max;
+    }
+}
+~~~
+
+### private引导的封装
+
+定义一个Person类
+
+~~~java
+package com.github.demo01;
+
+public class Person {
+    int age;
+    String name;
+
+    public void show(){	//不用static
+        System.out.println("我是" + name + "， 我" + age + "岁了。");
+    }
+}
+~~~
+
+创建一个对象，修改对象的name和age
+
+~~~java
+package com.github.demo01;
+
+public class PrivateName {
+    public static void main(String[] args) {
+        Person person = new Person();
+        person.show();
+
+        person.name = "三观";
+        person.age = 20;    
+        person.show();
+
+    }
+}
+~~~
+
+如果在Person类中修改为private int age，就无法在新的对象中进行修改了。private体现了一种封装的特性。只有在本类中才可以访问，超出本类范围就不能直接访问了。
+
+如果需要**间接访问private成员变量**，就需要**setter/getter方法**
+
+~~~java
+package com.github.demo01;
+
+public class Person {
+    private int age;
+    String name;
+
+    public void show(){
+        System.out.println("我是" + name + "， 我" + age + "岁了。");
+    }
+    
+	//定义了方法，用于设定年龄
+    public void setAge(int num){
+        if(num < 120 && num > 0){
+            age = num;
+        }else{
+            System.out.println("你输入了错误的年龄");
+        }
+    }
+
+    //定义方法用于返回年龄
+    public int getAge(){
+        return age;
+    }
+}
+~~~
+
+输出姓名和年龄的程序
+
+~~~java
+package com.github.demo01;
+
+
+public class PrivateName {
+    public static void main(String[] args) {
+        Person person = new Person();
+        person.show();
+
+        person.name = "三观";
+        person.setAge(-1);
+        person.show();
+
+    }
+}
+~~~
+
+注意private对应的设置必然有set和get两种形式，但是对于boolean类型的get换成了is
+
+### this关键字的作用
+
+在之前的student中添加下面这方法
+
+~~~java
+   public void sayhello(String name){
+        System.out.println(name + ", 你好！ " + "我是" + this.name);
+        System.out.println(this);
+    }
+~~~
+
+加入形参与成员变量名一致，需要添加**this加以区分**。其中，this和自己定义的对象的地址相同
+
+~~~java
+package com.github.demo01;
+
+public class Demo01SayHello {
+    public static void main(String[] args) {
+        Student person = new Student();
+        person.setName("李四");
+        person.sayhello("张三");
+        System.out.println(person);
+        /*
+        张三, 你好！ 我是李四
+com.github.demo01.Student@6e8cf4c6	这是this的地址值
+com.github.demo01.Student@6e8cf4c6	这是person的地址值
+        */
+    }
+}
+~~~
+
+## 7、构造方法
+
+构造方法是专门用于创建对象法方法，new就是一个构造方法的过程。
+
+格式
+
+public 类名称(参数类型 参数名称){
+
+​		方法体
+
+}
+
+注意事项
+
+* 构造方法要求与类的名称一致
+* 构造方法**不能写返回值类型**，void也不写
+* 构造方法**不能return**一个具体的返回值
+* 如果没有编写任何构造方法，编译器将会默认赠送一个方法，只有方法的框架，没有方法的内容
+
+例如构造一个学生类
+
+~~~java
+public class Student{
+    //定义成员变量
+    private int name;
+    private String name;
+    
+    //定义无参构造方法
+    public Student(){
+        System.out.println("无参构造方法调用了！");
+    }  
+    
+    //定义全参构造方法
+    public Student(int age, String name){
+        System.out.println("全参构造方法调用了！");
+        this.name = name;
+        this.age = age;
+    }
+    
+    //Setter
+    public void setAge(int age){
+        this.age = age;
+    }
+    
+    //Getter
+    public int getAge(){
+        return age;
+    }
+    
+    public void setName(String name){
+        this.name = name;
+    }
+    
+    public String getName(){
+        return name;
+    }
+}
+~~~
+
+创建一个新的对象
+
+~~~java
+public static void main(String[] args){
+    Student stu1 = new Student();
+    Student stu2 = new Student("张三", 20);
+    System.out.println("姓名：" + stu2.getName() + "年龄：" + stu2.getAge());
+}
+~~~
+
+## 8、标准的类
+
+一个标准的类通常由4部分组成
+
+* 所有的成员变量都要使用private关键字修饰
+* 需要为每一个成员变量编写一对getter/setter方法
+*  编写一个无参数的构造方法
+* 编写一个有参数的构造方法
+
+code-generate-getter and setter，按shift进行全选
+
+code-generate-constructor，select none构造无参数的方法
+

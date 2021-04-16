@@ -207,3 +207,9 @@ switch(light){
         break;
 }
 ~~~
+
+# 四、深入理解Java语言
+
+## 1、变量及其传递
+
+变量有基本类型(primitive type)和引用类型(reference type)。
